@@ -12,9 +12,9 @@ Vide tutoriais do PI.
 
 # Nome do Projeto
 
-## Nome do Grupo
+## Enrolados
 
-## Integrantes: <a href="https://www.linkedin.com/in/victorbarq/">Goku Sayajin</a>, <a href="https://www.linkedin.com/in/victorbarq/">Saitama One</a>, <a href="https://www.linkedin.com/in/victorbarq/">Ikki de Fenix</a>, <a href="https://www.linkedin.com/in/victorbarq/">Yusuke Urameshi</a>, <a href="https://www.linkedin.com/in/victorbarq/">Roronoa Zoro</a>
+## Integrantes: <a href="https://www.linkedin.com/in/guilhermebarioni/">Guilherme Barioni</a>, <a href="https://www.linkedin.com/in/iury-xavier-03699430a/">Iury Xavier</a>, <a href="https://www.linkedin.com/in/lilian-mercedes-paye-conde-894051333//">Lilian Conde</a>, <a href="https://www.linkedin.com/in/marcus-vin%C3%ADcius-miranda-duque-8987a5322/">Marcus Duque</a>, <a href="https://www.linkedin.com/in/murilodesouzavieira/">Murilo Vieira</a>
 
 ## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Dr. Victor Von Doom</a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Saitama</a>, <a href="https://www.linkedin.com/in/victorbarq/">Dr. Strange</a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Yoda</a>, <a href="https://www.linkedin.com/in/victorbarq/">Dr. Gero</a>
 
