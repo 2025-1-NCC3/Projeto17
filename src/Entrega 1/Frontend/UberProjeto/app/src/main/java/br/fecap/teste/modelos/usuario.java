@@ -18,6 +18,8 @@ public class usuario {
         this.email = email;
     }
 
+
+
     // Getter e Setters
     public String getNome() {
         return nome;

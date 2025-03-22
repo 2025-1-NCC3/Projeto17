@@ -21,4 +21,8 @@ public interface ApiService {
     //Endpoint para pegar um usuario
     @POST("login")
     Call<usuario> validarUser(@Body usuario user);
+
+    //Endpoint para deletar um usuario
+    @POST("deletar")
+    Call<usuario> deletarUser(@Body usuario user);
 }

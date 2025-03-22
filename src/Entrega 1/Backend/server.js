@@ -6,10 +6,10 @@ const port = process.env.PORT || 443;
 
 // Conexão MySQL
 const db = mysql.createConnection({
-  host: '',
-  user: '', 
-  password: '', 
-  database: '',
+  host: process.env.host,
+  user: process.env.user, 
+  password: process.env.password, 
+  database: process.env.database,
   ssl:{
     rejectUnauthorized: false
 }
@@ -88,6 +88,58 @@ app.post("/login", function(req, res) {
       res.json(userData);  //Manda os dados como Json
   });
 });
+
+//Post para modificar o nome do usuario
+app.post("/modificar", function(req, res){
+  var email = req.body.email;
+  var novoNome = req.body.nome;
+  var query1 = 'Select * from usuario where email = ?'
+  var query2 = 'Update usuario set nome = ? where id = ?;'
+
+  db.query(query1, [email], (err, rows) => {
+    if (err) {
+      console.error('Erro buscando usuarios:', err);
+      return res.status(500).json({ error: 'Erro buscando usuarios' });
+  }
+  
+  if (rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario não encontrado' });
+  }
+  var id = rows[0].id;
+  db.query(query2, [novoNome , id], (err, rows) =>{
+    if (err) {
+      console.error('Erro buscando usuarios:', err);
+      return res.status(500).json({ error: 'Erro buscando usuarios' });
+  }
+  return res.json(novoNome)
+  })
+  })
+})
+// Post para deletar o usuario
+app.post("/deletar", function(req, res){
+  var email = req.body.email;
+  var query1 = 'Select * from usuario where email = ?';
+  var query2 = 'delete from usuario where id = ?'
+
+  db.query(query1, [email], (err, rows)=>{
+    if (err) {
+      console.error('Erro buscando usuarios:', err);
+      return res.status(500).json({ error: 'Erro buscando usuarios' });
+  }
+  
+  if (rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario não encontrado' });
+  }
+  var id = rows[0].id;
+  db.query(query2, [id], (err, rows) =>{
+    if (err) {
+      console.error('Erro buscando usuarios:', err);
+      return res.status(500).json({ error: 'Erro buscando usuarios' });
+  }
+  return res.status(200).json({ message: "Usuario deletado com sucesso!" });
+  })
+  })
+})
 
 
 app.get("/", function (req, res) {

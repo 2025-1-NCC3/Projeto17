@@ -1,26 +1,4 @@
 <resources>
     <string name="app_name">UberProject</string>
-    <!--Texto TextView-->
-    <string name="login_texto">Entre na sua conta!</string>
-    <string name="card_login_titulo">Login</string>
-    <string name="esque_senha_login">Esqueci a senha!</string>
-    <string name="card_cadastro_titulo">Cadastrar-se</string>
 
-    <!--Texto Botões-->
-    <string name="botao_entrar">Entrar</string>
-    <string name="botao_cadastro">Cadastro</string>
-    <string name="sairbtn">x</string>
-    <string name="voltar_side_menu">&lt;</string>
-
-    <!--Texto Hint-->
-    <string name="email_login">Digite o seu email:</string>
-    <string name="senha_login">Digite a sua senha:</string>
-    <string name="card_cadastro_nome_input">Digite o seu nome:</string>
-    <string name="card_cadastro_telefone_input">Digite o seu telefone:</string>
-    <string name="destino_text_input">Aonde você vai?</string>
-
-    <!--Descrições-->
-    <string name="login_descricao">Ilustração do rosto de um garoto</string>
-    <string name="menu_side_botao">Botão do menu lateral</string>
-    <string name="menu_side">Menu Lateral</string>
 </resources>
