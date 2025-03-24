@@ -53,7 +53,7 @@ Execute o APK e siga as instruções de seu telefone.
 
 Para abrir este projeto você necessita das seguintes ferramentas:
 
--<a href="https://www.java.com/pt-BR/">Java</a>
+-<a href="https://www.java.com/pt-BR/">Java</a><br>
 -<a href="https://developer.android.com/studio?hl=pt-br">Android Studio</a>
 
 ## 📋 Licença/License
