@@ -25,4 +25,7 @@ public interface ApiService {
     //Endpoint para deletar um usuario
     @POST("deletar")
     Call<usuario> deletarUser(@Body usuario user);
+
+    @GET("/")
+    Call<Void> getRoot();
 }

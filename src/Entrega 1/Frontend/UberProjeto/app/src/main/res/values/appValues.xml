@@ -12,6 +12,7 @@
     <string name="sairbtn">x</string>
     <string name="voltar_side_menu">&lt;</string>
     <string name="deletarBtn">Deletar Usuario</string>
+    <string name="carregarBtn">Carregando&#8230;</string>
 
     <!--Texto Hint-->
     <string name="email_login">Digite o seu email:</string>

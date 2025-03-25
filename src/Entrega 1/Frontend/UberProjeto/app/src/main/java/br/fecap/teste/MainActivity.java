@@ -105,9 +105,26 @@ public class MainActivity extends AppCompatActivity{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
 
         });
+        //Essa chamada garante que a conexão com o backend esteja funcionando corretamente evitando erros como timeout
+        callRootApi();
 
-        ;
+    }
 
+    private void callRootApi() {
+        apiService.getRoot().enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("MainActivity", "Sucesso!!");
+                } else {
+                    Log.e("MainActivity", "Falha ao conectar com o servidor");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("MainActivity", "Erro: " + t.getMessage());
+            }
+        });
     }
 
     public void buscarLocal(View view){
@@ -538,6 +555,7 @@ public class MainActivity extends AppCompatActivity{
         String telefoneText = telefone.getText().toString();
         EditText senha = findViewById(R.id.senhaCadastroInput);
         String senhaText = senha.getText().toString();
+        Button cadastroBtn = findViewById(R.id.btnCadastrar2);
 
         CardView cadastroLayout = findViewById(R.id.cadastrarLayout);
         CardView menuPrincipal = findViewById(R.id.mainMenu);
@@ -547,10 +565,12 @@ public class MainActivity extends AppCompatActivity{
         usuario user = new usuario(nomeText,senhaText,emailText,telefoneText);
 
         Call<Void> call = apiService.addUser(user);
+        cadastroBtn.setText(getResources().getString(R.string.carregarBtn));
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    cadastroBtn.setText(getResources().getString(R.string.botao_cadastro));
                     Toast.makeText(MainActivity.this, "Usuario Cadastrado!", Toast.LENGTH_SHORT).show();
                     usuarioAtual = new usuario(nomeText,"",emailText,telefoneText);
 
@@ -558,6 +578,7 @@ public class MainActivity extends AppCompatActivity{
                     cadastroLayout.setVisibility(View.GONE);
                     menuPrincipal.setVisibility(View.VISIBLE);
                 } else {
+                    cadastroBtn.setText(getResources().getString(R.string.botao_cadastro));
                     //Loga o erro para mais detalhes
                     try {
                         String errorMessage = response.errorBody() != null ? response.errorBody().string() : "Erro desconhecido";
@@ -572,6 +593,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                cadastroBtn.setText(getResources().getString(R.string.botao_cadastro));
                 Toast.makeText(MainActivity.this, "Erro: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -618,6 +640,7 @@ public class MainActivity extends AppCompatActivity{
     public void loginUsuario(View view) {
         EditText email = findViewById(R.id.editEmailLogin);
         EditText senha = findViewById(R.id.editSenhaLogin);
+        Button loginBtn = findViewById(R.id.loginSendBtn);
 
         TextView sideBarTesteNome = findViewById(R.id.testeNomeUsuario);
         CardView loginLayout = findViewById(R.id.layoutLogin);
@@ -631,10 +654,12 @@ public class MainActivity extends AppCompatActivity{
 
         // Faz a chamada da API
         Call<usuario> call = apiService.validarUser(user);
+        loginBtn.setText(getResources().getString(R.string.carregarBtn));
         call.enqueue(new Callback<usuario>() {
             @Override
             public void onResponse(Call<usuario> call, Response<usuario> response) {
                 if (response.isSuccessful()) {
+                    loginBtn.setText(getResources().getString(R.string.botao_entrar));
                     // Pega os usuarios da resposta
                     usuario loggedInUser = response.body();
                     if (loggedInUser != null) {
@@ -654,6 +679,7 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(MainActivity.this, "Nenhum usuario encontrado", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    loginBtn.setText(getResources().getString(R.string.botao_entrar));
                     try {
                         // Log dos erros
                         String errorMessage = response.errorBody() != null ? response.errorBody().string() : "Erro desconhecido";
@@ -668,6 +694,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<usuario> call, Throwable t) {
+                loginBtn.setText(getResources().getString(R.string.botao_entrar));
                 // Log dos erros
                 t.printStackTrace();
                 Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
