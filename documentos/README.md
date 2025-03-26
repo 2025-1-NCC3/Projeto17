@@ -5,7 +5,7 @@
 
 ### Análise Descritiva de Dados
 
-<b>[Excel](https://github.com/2025-1-NCC3/Projeto17/tree/main/documentos/Entrega%201/An%C3%A1lise%20Descritiva%20de%20Dados)</b>
+<b>[Análise dos dados](https://github.com/2025-1-NCC3/Projeto17/tree/main/documentos/Entrega%201/An%C3%A1lise%20Descritiva%20de%20Dados)</b>
 <br><br>
 
 ### Programação Orientada a Objetos e Estrutura de Dados
