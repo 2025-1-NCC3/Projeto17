@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ public class Alertas extends AppCompatActivity {
             finish();
 
         });
-        ImageButton btnVoltar = findViewById(R.id.voltarT2Btn);
+        ImageView btnVoltar = findViewById(R.id.voltarT2Btn);
         btnVoltar.setOnClickListener(view ->{
             finish();
         });
