@@ -438,7 +438,6 @@ public class MainActivity extends AppCompatActivity{
                                     if (coordinatesObj instanceof List<?>) {
                                         List<?> coordinates = (List<?>) coordinatesObj;
 
-                                        // Ensure at least three points for the polygon
                                         if (coordinates.size() >= 3) {
                                             List<GeoPoint> geoPoints = new ArrayList<>();
                                             for (Object coordinate : coordinates) {
@@ -499,7 +498,6 @@ public class MainActivity extends AppCompatActivity{
 
 
     private void addMarkerToMap(double latitude, double longitude, String title) {
-        // Add the marker to the map
         try {
             if (map == null) {
                 Log.e("GeoJson", "Mapa não foi inicializado.");
@@ -513,7 +511,6 @@ public class MainActivity extends AppCompatActivity{
             List<OverlayItem> items = new ArrayList<>();
             items.add(overlayItem);
 
-            // Create the overlay with a click listener
             ItemizedOverlayWithFocus<OverlayItem> overlay = new ItemizedOverlayWithFocus<>(this, items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
                 @Override
                 public boolean onItemSingleTapUp(int index, OverlayItem item) {
@@ -529,9 +526,8 @@ public class MainActivity extends AppCompatActivity{
                 }
             });
 
-            // Add the overlay to the map
             map.getOverlays().add(overlay);
-            map.invalidate(); // Refresh the map
+            map.invalidate();
 
         } catch (Exception e) {
             e.printStackTrace();
