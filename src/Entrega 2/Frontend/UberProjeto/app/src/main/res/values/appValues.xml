@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Texto TextView - T1-->
+    <string name="login_texto">Entre na sua conta!</string>
+    <string name="card_login_titulo">Login</string>
+    <string name="esque_senha_login">Esqueci a senha!</string>
+    <string name="card_cadastro_titulo">Cadastrar-se</string>
+    <string name="alerta_pop_up_titulo">Alerta!</string>
+
+    <!--Texto Botões - T1-->
+    <string name="botao_entrar">Entrar</string>
+    <string name="botao_cadastro">Cadastro</string>
+    <string name="sairbtn">x</string>
+    <string name="voltar_side_menu">&lt;</string>
+    <string name="deletarBtn">Deletar Usuario</string>
+    <string name="carregarBtn">Carregando&#8230;</string>
+
+    <!--Texto Hint - T1-->
+    <string name="email_login">Digite o seu email:</string>
+    <string name="senha_login">Digite a sua senha:</string>
+    <string name="card_cadastro_nome_input">Digite o seu nome:</string>
+    <string name="card_cadastro_telefone_input">Digite o seu telefone:</string>
+    <string name="destino_text_input">Aonde você vai?</string>
+
+    <!--Descrições - T1-->
+    <string name="login_descricao">Ilustração do rosto de um garoto</string>
+    <string name="menu_side_botao">Botão do menu lateral</string>
+    <string name="menu_side">Menu Lateral</string>
+    <string name="buscarBtnDescricao">Botão de buscar destino</string>
+
+    <!--Cores-->
+    <color name="deletarBtnCor">#ff0000</color>
+
+    <!--Texto RadioGroup - T2-->
+    <string name="rbCelular">Roubo de celular</string>
+    <string name="rbCarro">Roubo de carro</string>
+
+    <!--Texto Botões - T2-->
+    <string name="enviarAlertaBtn">Emitir Alerta</string>
+
+    <!--Texto TextView - T2-->
+    <string name="tituloT2">Selecione a ocorrência e emita um alerta com a sua localização</string>
+</resources>
