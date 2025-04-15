@@ -11,7 +11,7 @@
 
 ## Integrantes: <a href="https://www.linkedin.com/in/guilhermebarioni/">Guilherme Barioni</a>, <a href="https://www.linkedin.com/in/iury-xavier-03699430a/">Iury Xavier</a>, <a href="https://www.linkedin.com/in/lilian-mercedes-paye-conde-894051333//">Lilian Conde</a>, <a href="https://www.linkedin.com/in/marcus-vin%C3%ADcius-miranda-duque-8987a5322/">Marcus Duque</a>, <a href="https://www.linkedin.com/in/murilodesouzavieira/">Murilo Vieira</a>
 
-## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Victor Bruno Alexander Rosetti de Quiroz</a>, <a href="https://www.linkedin.com/in//">Katia Milani Lara Bossi</a>, <a href="https://www.linkedin.com/in//">Vinicius Heltai Pacheco</a>, <a href="https://www.linkedin.com/in/marco-aurelio-lima-barbosa/"> Marco Aurelio</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Victor Bruno Alexander Rosetti de Quiroz</a>, <a href="https://www.linkedin.com/in/katia-bossi/">Katia Milani Lara Bossi</a>, <a href="https://www.linkedin.com/in//">Vinicius Heltai Pacheco</a>, <a href="https://www.linkedin.com/in/marco-aurelio-lima-barbosa/"> Marco Aurelio</a>
 
 ## Descrição
 
