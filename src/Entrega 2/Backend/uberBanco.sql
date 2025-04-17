@@ -30,8 +30,8 @@ telefone varchar(50) not null unique
 create table alerta(
 id int primary key auto_increment,
 tipoAlerta varchar(255) not null,
-latitude double not null,
-longitude double not null,
+latitude varchar(25) not null,
+longitude varchar(25) not null,
 dataOcorrencia datetime default current_timestamp,
 idUsuario int,
 foreign key (idUsuario) references Usuario(id)
@@ -39,4 +39,4 @@ foreign key (idUsuario) references Usuario(id)
 
 create table logErros(
 id int primary key auto_increment,
-erro varchar(10000) not null);
+erro varchar(255) not null);

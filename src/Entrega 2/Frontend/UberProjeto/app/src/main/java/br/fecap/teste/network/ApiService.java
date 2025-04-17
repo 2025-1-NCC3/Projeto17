@@ -41,4 +41,13 @@ public interface ApiService {
 
     @GET("buscarAlerta")
     Call<List<Alerta>> buscarAlerta();
+
+    @POST("mudarNome")
+    Call<usuario> modificarNome(@Body usuario user);
+
+    @POST("mudarTelefone")
+    Call<usuario> modificarTelefone(@Body usuario user);
+
+    @POST("mudarEmail")
+    Call<usuario> modificarEmail(@Body usuario user);
 }

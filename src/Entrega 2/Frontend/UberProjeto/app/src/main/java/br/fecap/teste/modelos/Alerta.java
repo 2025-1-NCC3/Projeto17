@@ -1,19 +1,21 @@
 package br.fecap.teste.modelos;
 
+import br.fecap.teste.network.Criptografia;
+
 public class Alerta {
     private String nomeUsuario;
-    private double longitude;
-    private double latitude;
+    private String longitude;
+    private String latitude;
     private String tipoAlerta;
 
-    public Alerta(String nomeUsuario, double longitude, double latitude, String tipoAlerta){
+    public Alerta(String nomeUsuario, String longitude, String latitude, String tipoAlerta){
         this.nomeUsuario = nomeUsuario;
         this.latitude = latitude;
         this.longitude = longitude;
         this.tipoAlerta = tipoAlerta;
     }
 
-    public Alerta(double latitude, double longitude, String tipoAlerta){
+    public Alerta(String latitude, String longitude, String tipoAlerta){
         this.latitude = latitude;
         this.longitude = longitude;
         this.tipoAlerta = tipoAlerta;
@@ -21,10 +23,10 @@ public class Alerta {
 
     //Getters e Setters
     public double getLongitude() {
-        return longitude;
+        return Double.parseDouble(Criptografia.Descriptografar(longitude, tipoAlerta));
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -37,10 +39,10 @@ public class Alerta {
     }
 
     public double getLatitude() {
-        return latitude;
+        return Double.parseDouble(Criptografia.Descriptografar(latitude, tipoAlerta));
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 

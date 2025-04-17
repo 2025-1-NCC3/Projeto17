@@ -86,39 +86,12 @@ app.post("/login", function(req, res) {
       var userData = {
           nome: rows[0].nome,
           email: rows[0].email,
-          telefone: rows[0].telefone
+          celular: rows[0].telefone
       };
 
       res.json(userData);  //Manda os dados como Json
   });
 });
-
-//Post para modificar o nome do usuario
-app.post("/modificar", function(req, res){
-  var email = req.body.email;
-  var novoNome = req.body.nome;
-  var query1 = 'Select * from usuario where email = ?'
-  var query2 = 'Update usuario set nome = ? where id = ?;'
-
-  db.query(query1, [email], (err, rows) => {
-    if (err) {
-      console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' });
-  }
-  
-  if (rows.length === 0) {
-      return res.status(404).json({ error: 'Usuario não encontrado' });
-  }
-  var id = rows[0].id;
-  db.query(query2, [novoNome , id], (err, rows) =>{
-    if (err) {
-      console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' });
-  }
-  return res.json(novoNome)
-  })
-  })
-})
 // Post para deletar o usuario
 app.post("/deletar", function(req, res){
   var email = req.body.email;
@@ -188,6 +161,78 @@ app.get("/buscarAlerta", function(req, res){
   })
 })
 
+//Updates
+app.post("/mudarNome", function(req, res){
+  var novoNome = req.body.nome;
+  var senhaCripto = req.body.senha;
+  var email = req.body.email;
+  var senhaDescript = Descriptografar(senhaCripto, email);
+  var query1 = "Select * from usuario where email = ?";
+  var query2 = "Update usuario set nome = ? where email = ?";
+  db.query(query1, [email], (err, rows)=>{
+    var senhaUsuario = Descriptografar(rows[0].senha, email);
+    if(senhaDescript != senhaUsuario){
+      return res.status(404).json({ error: 'Senha incorreta' });
+    }
+    db.query(query2,[novoNome,email],(err, rows)=>{
+      if (err) {
+        console.error('Falha ao modificar nome', err);
+        return res.status(500).json({ error: 'Falha ao modificar nome' + err.message });
+      }
+      res.status(201).json({ message: 'Nome modificado!' });
+    })
+  })
+})
+
+app.post("/mudarTelefone", function(req, res){
+  var novoTelefone = req.body.celular;
+  var senhaCripto = req.body.senha;
+  var email = req.body.email;
+  var senhaDescript = Descriptografar(senhaCripto, email);
+  var query1 = "Select * from usuario where email = ?";
+  var query2 = "Update usuario set telefone = ? where email = ?";
+  db.query(query1, [email], (err, rows)=>{
+    var senhaUsuario = Descriptografar(rows[0].senha, email);
+    if(senhaDescript != senhaUsuario){
+      return res.status(404).json({ error: 'Senha incorreta' });
+    }
+    db.query(query2,[novoTelefone, email],(err, rows)=>{
+      if (err) {
+        console.error('Falha ao modificar telefone', err);
+        return res.status(500).json({ error: 'Falha ao modificar telefone' + err.message });
+      }
+      res.status(201).json({ message: 'Telefone modificado!' });
+    })
+  })
+})
+
+app.post("/mudarEmail", function(req, res){
+  var novoEmail = req.body.nome;
+  var senhaCripto = req.body.senha;
+  var antigoEmail = req.body.email;
+  var senhaDescript = Descriptografar(senhaCripto, antigoEmail);
+  var query1 = "Select * from usuario where email = ?";
+  var query2 = "Update usuario set email = ?, senha = ?, telefone = ?, nome = ? where email = ?";
+  db.query(query1, [antigoEmail], (err, rows)=>{
+    var senhaUsuario = Descriptografar(rows[0].senha, antigoEmail);
+    var nomeUsuario = Descriptografar(rows[0].nome, antigoEmail);
+    var telefoneUsuario = Descriptografar(rows[0].telefone, antigoEmail);
+    if(senhaDescript != senhaUsuario){
+      return res.status(404).json({ error: 'Senha incorreta' });
+    }
+    senhaCripto = Criptografar(senhaUsuario, novoEmail);
+    var nomeCripto = Criptografar(nomeUsuario,novoEmail);
+    var telefoneCripto = Criptografar(telefoneUsuario, novoEmail);
+    db.query(query2, [novoEmail, senhaCripto, telefoneCripto, nomeCripto, antigoEmail],(err, rows)=>{
+      if (err) {
+        console.error('Falha ao modificar email', err);
+        return res.status(500).json({ error: 'Falha ao modificar email' + err.message });
+      }
+      res.status(201).json({ message: 'Email modificado!' });
+    })
+  })
+})
+
 //Entrada para log de erros do app(Para testes)
 app.post("/logErro", function(req, res){
   var logErro = req.body.logErro;
@@ -221,40 +266,77 @@ app.get("/", function (req, res) {
 
 
 //Descriptografar
-function Descriptografar(senha, email) {
-  var senhaCriptoSplit = senha.split('');
-  var emailSplit = email.split('');
-  var keyCodes = new Array(emailSplit.length);
-  var keyCodeSenhaCript;
-  var senhaDescriptChar;
-  var senhaDescriptografada = "";
+function Descriptografar(dado, chave) {
+  var dadoCriptoSplit = dado.split('');
+  var chaveSplit = chave.split('');
+  var keyCodes = new Array(chaveSplit.length);
+  var keyCodeDadoCript;
+  var dadoDescriptChar;
+  var dadoDescriptografado = "";
 
-  for (var i = 0; i < emailSplit.length; i++) {
-    keyCodes[i] = emailSplit[i].charCodeAt(0);
+  for (var i = 0; i < chaveSplit.length; i++) {
+    keyCodes[i] = chaveSplit[i].charCodeAt(0);
   }
 
-  for (var i = 0, j = 0; i < senhaCriptoSplit.length; i++) {
-    keyCodeSenhaCript = senhaCriptoSplit[i].charCodeAt(0);
-    keyCodeSenhaCript -= keyCodes[j];
+  for (var i = 0, j = 0; i < dadoCriptoSplit.length; i++) {
+    keyCodeDadoCript = dadoCriptoSplit[i].charCodeAt(0);
+    keyCodeDadoCript -= keyCodes[j];
     j++;
 
     if (j > keyCodes.length - 1) {
       j = 0;
-      keyCodeSenhaCript -= keyCodes[j];
+      keyCodeDadoCript -= keyCodes[j];
     } else {
-      keyCodeSenhaCript -= keyCodes[j];
+      keyCodeDadoCript -= keyCodes[j];
     }
 
-    if (keyCodeSenhaCript < 32) {
-      keyCodeSenhaCript += 223;
+    if (keyCodeDadoCript < 32) {
+      keyCodeDadoCript += 223;
     }
 
-    senhaDescriptChar = String.fromCharCode(keyCodeSenhaCript);
-    senhaDescriptografada += senhaDescriptChar;
+    dadoDescriptChar = String.fromCharCode(keyCodeDadoCript);
+    dadoDescriptografado += dadoDescriptChar;
   }
 
-  return senhaDescriptografada;
+  return dadoDescriptografado;
 }
+
+//Criptografar
+function Criptografar(dado, chave) {
+  var dadoCriptoSplit = dado.split('');
+  var chaveSplit = chave.split('');
+  var keyCodes = []; 
+  var keyCodeDadoCript;
+  var dadoCriptChar;
+  var dadoCriptografado = "";
+  
+  for (var i = 0; i < chaveSplit.length; i++) {
+    keyCodes[i] = chaveSplit[i].charCodeAt(0);
+  }
+
+  for (var i = 0, j = 0; i < dadoCriptoSplit.length; i++) {
+    keyCodeDadoCript = dadoCriptoSplit[i].charCodeAt(0);
+    keyCodeDadoCript += keyCodes[j];
+    j++;
+
+    if (j > keyCodes.length - 1) {
+      j = 0;
+      keyCodeDadoCript += keyCodes[j];
+    } else {
+      keyCodeDadoCript += keyCodes[j];
+    }
+
+    if (keyCodeDadoCript > 255) {
+      keyCodeDadoCript -= 223;
+    }
+
+    dadoCriptChar = String.fromCharCode(keyCodeDadoCript);
+    dadoCriptografado += dadoCriptChar;
+  }
+
+  return dadoCriptografado;
+}
+
 
 
 

@@ -33,6 +33,7 @@ import br.fecap.teste.modelos.Alerta;
 import br.fecap.teste.modelos.LogErros;
 import br.fecap.teste.network.ApiClient;
 import br.fecap.teste.network.ApiService;
+import br.fecap.teste.network.Criptografia;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,11 +42,10 @@ public class Alertas extends AppCompatActivity {
 
     private String nomeUsuarioAtual;
     private FusedLocationProviderClient fusedLocationClient;
-    private Double latitude;
-    private Double longitude;
+    private String latitude;
+    private String longitude;
     private String tipoAlerta;
-    private RadioButton rbCelular;
-    private RadioButton rbCarro;
+    private RadioButton rbCelular, rbCarro, rbEnchente, rbTransito;
     public ApiService apiService;
 
     @Override
@@ -64,6 +64,8 @@ public class Alertas extends AppCompatActivity {
 
         rbCelular = findViewById(R.id.rbCelular);
         rbCarro = findViewById(R.id.rbCarro);
+        rbTransito = findViewById(R.id.rbTransito);
+        rbEnchente = findViewById(R.id.rbEnchente);
 
         Button btnEnviar = findViewById(R.id.emitirAlertaBtn);
         btnEnviar.setOnClickListener(view ->{
@@ -92,8 +94,8 @@ public class Alertas extends AppCompatActivity {
                         @Override
                         public void onSuccess(Location location) {
                             if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
+                                latitude = String.valueOf(location.getLatitude());
+                                longitude = String.valueOf(location.getLongitude());
                                 EmitirAlerta();
                             }
                         }
@@ -110,10 +112,18 @@ public class Alertas extends AppCompatActivity {
         if (rbCarro.isChecked()){
             tipoAlerta = "Roubo de carro";
         }
+        if(rbEnchente.isChecked()){
+            tipoAlerta = "Risco de enchente";
+        }
+        if (rbTransito.isChecked()){
+            tipoAlerta = "Trânsito";
+        }
     }
 
     private void EmitirAlerta(){
-        Alerta novoAlerta = new Alerta(nomeUsuarioAtual, longitude, latitude, tipoAlerta);
+        String longitudeCript = Criptografia.Criptografar(longitude, tipoAlerta);
+        String latitudeCript = Criptografia.Criptografar(latitude, tipoAlerta);
+        Alerta novoAlerta = new Alerta(nomeUsuarioAtual, longitudeCript, latitudeCript, tipoAlerta);
         apiService.emitirAlerta(novoAlerta).enqueue(new Callback<Alerta>() {
             @Override
             public void onResponse(Call<Alerta> call, Response<Alerta> response) {

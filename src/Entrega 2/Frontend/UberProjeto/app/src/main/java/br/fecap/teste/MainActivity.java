@@ -4,6 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -34,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     public ApiService apiService;
-    private usuario usuarioAtual;
+    public static usuario usuarioAtual;
     private static final String ORS_API_KEY = "5b3ce3597851110001cf6248df9d8db9188a4b97ab8ff08477a8797d";
     private FusedLocationProviderClient fusedLocationClient;
     private GeoPoint myLocation;
@@ -122,11 +126,22 @@ public class MainActivity extends AppCompatActivity{
         //Essa chamada garante que a conexão com o backend esteja funcionando corretamente evitando erros como timeout
         callRootApi();
 
-        //btn Listeners
+        //Botões do Menu Principal
         ImageView btnAlerta = findViewById(R.id.alertBtn);
+        ImageView btnConfig = findViewById(R.id.configBtn);
+        ImageView btnMeuPerfil = findViewById(R.id.perfilBtn);
+        //btn Listerners
         btnAlerta.setOnClickListener(view ->{
             Intent intent = new Intent(this, Alertas.class);
             intent.putExtra("usuarioatual", usuarioAtual.getNome());
+            startActivity(intent);
+        });
+        btnMeuPerfil.setOnClickListener(view ->{
+            Intent intent = new Intent(this, MeuPerfil.class);
+            intent.putExtra("usuarioatualnome", usuarioAtual.getNome());
+            intent.putExtra("usuarioatualemail", usuarioAtual.getEmail());
+            intent.putExtra("usuarioatualtelefone", usuarioAtual.getCelular());
+            intent.putExtra("usuarioatualsenha", usuarioAtual.getSenha());
             startActivity(intent);
         });
 
@@ -153,6 +168,18 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
                 sideMenu.setVisibility(View.GONE);
             }else {
+                Toast.makeText(MainActivity.this, "Você não está logado", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnSideMeuPerfil.setOnClickListener(view->{
+            if(usuarioAtual !=null){
+                Intent intent = new Intent(this, MeuPerfil.class);
+                intent.putExtra("usuarioatualnome", usuarioAtual.getNome());
+                intent.putExtra("usuarioatualemail", usuarioAtual.getEmail());
+                intent.putExtra("usuarioatualtelefone", usuarioAtual.getCelular());
+                intent.putExtra("usuarioatualsenha", usuarioAtual.getSenha());
+                startActivity(intent);
+            }else{
                 Toast.makeText(MainActivity.this, "Você não está logado", Toast.LENGTH_SHORT).show();
             }
         });
@@ -216,7 +243,7 @@ public class MainActivity extends AppCompatActivity{
                                 myLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
                                 map.getController().setCenter(myLocation);
                                 map.getController().setZoom(15);
-                                addMarkerToMap(myLocation.getLatitude(), myLocation.getLongitude(), "My Location");
+                                addMarkerToMap(myLocation.getLatitude(), myLocation.getLongitude(), "Minha localização");
                             }
                         }
                     });
@@ -372,9 +399,6 @@ public class MainActivity extends AppCompatActivity{
                             Log.e("GeoJson", "Coordenadas do ponto invalidas");
                             Toast.makeText(this, "Coordenadas do ponto invalidas", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Log.e("GeoJson", "Coordenadas do ponto não são uma lista");
-                        Toast.makeText(this, "Coordenadas do ponto não são uma lista", Toast.LENGTH_LONG).show();
                     }
                 }
                 // Lida com a geometria dos poligonos
@@ -409,22 +433,10 @@ public class MainActivity extends AppCompatActivity{
                                         polygon.setStrokeColor(0xFF0000FF);
                                         polygon.setStrokeWidth(2);
                                         map.getOverlays().add(polygon);
-                                    } else {
-                                        Log.e("GeoJson", "Coordenadas do poligono estão incompletas.");
-                                        Toast.makeText(this, "Coordenadas do poligono estão incompletas.", Toast.LENGTH_LONG).show();
                                     }
-                                } else {
-                                    Log.e("GeoJson", "Coordenadas do poligono tem menos de três pontos");
-                                    Toast.makeText(this, "Coordenadas do poligono tem menos de três pontos.", Toast.LENGTH_LONG).show();
                                 }
-                            } else {
-                                Log.e("GeoJson", "Coodernadas do poligono invalidas");
-                                Toast.makeText(this, "Coodernadas do poligono invalidas", Toast.LENGTH_LONG).show();
                             }
                         }
-                    } else {
-                        Log.e("GeoJson", "Coodernadas do poligono não são uma lista");
-                        Toast.makeText(this, "Coodernadas do poligono não são uma lista", Toast.LENGTH_LONG).show();
                     }
                 }else if ("MultiPolygon".equals(geometry.getType())) {
                     if (geometry.getCoordinates() instanceof List<?>) {
@@ -459,32 +471,13 @@ public class MainActivity extends AppCompatActivity{
                                                 polygon.setStrokeColor(0xFF0000FF);
                                                 polygon.setStrokeWidth(2);
                                                 map.getOverlays().add(polygon);
-                                            } else {
-                                                Log.e("GeoJson", "Polygon coordinates are incomplete.");
-                                                Toast.makeText(this, "Polygon coordinates are incomplete.", Toast.LENGTH_LONG).show();
                                             }
-                                        } else {
-                                            Log.e("GeoJson", "Polygon coordinates have less than three points.");
-                                            Toast.makeText(this, "Polygon coordinates have less than three points.", Toast.LENGTH_LONG).show();
                                         }
-                                    } else {
-                                        Log.e("GeoJson", "Invalid polygon coordinates");
-                                        Toast.makeText(this, "Invalid polygon coordinates", Toast.LENGTH_LONG).show();
                                     }
                                 }
-                            } else {
-                                Log.e("GeoJson", "Invalid multipolygon structure");
-                                Toast.makeText(this, "Invalid multipolygon structure", Toast.LENGTH_LONG).show();
                             }
                         }
-                    } else {
-                        Log.e("GeoJson", "Multipolygon coordinates are not a list");
-                        Toast.makeText(this, "Multipolygon coordinates are not a list", Toast.LENGTH_LONG).show();
                     }
-                }
-                else {
-                    Log.e("GeoJson", "Tipo de geometria invalida:" + geometry.getType());
-                    Toast.makeText(this, "Tipo de geometria invalida: " + geometry.getType(), Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception e) {
@@ -508,7 +501,33 @@ public class MainActivity extends AppCompatActivity{
             GeoPoint point = new GeoPoint(latitude, longitude);
             OverlayItem overlayItem = new OverlayItem(title, "", point);
 
+            Drawable markerIcon = null;
+
             List<OverlayItem> items = new ArrayList<>();
+            if (title.equals("Roubo de Celular")) {
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.alertacelular, null);
+                overlayItem.setMarker(markerIcon);
+            } else if (title.equals("Roubo de carro")) {
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.alertacarro, null);
+                overlayItem.setMarker(markerIcon);
+            } else if (title.equals("Minha localização")) {
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.localatual, null);
+                overlayItem.setMarker(markerIcon);
+            }
+
+            if (markerIcon != null) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) markerIcon;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                int newWidth = 100;
+                int newHeight = 100;
+
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
+
+                markerIcon = new BitmapDrawable(getResources(), scaledBitmap);
+                overlayItem.setMarker(markerIcon);
+            }
+
             items.add(overlayItem);
 
             ItemizedOverlayWithFocus<OverlayItem> overlay = new ItemizedOverlayWithFocus<>(this, items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
@@ -546,6 +565,16 @@ public class MainActivity extends AppCompatActivity{
         //Atualiza o osmdroid onResume
         map.onResume();
         BuscarAlerta();
+        TextView sideBarNome = findViewById(R.id.testeNomeUsuario);
+        CardView layoutCredenciais = findViewById(R.id.layoutCredenciais);
+        CardView layoutMainMenu = findViewById(R.id.mainMenu);
+        if (usuarioAtual != null){
+            sideBarNome.setText(Criptografia.Descriptografar(usuarioAtual.getNome(),usuarioAtual.getEmail()));
+        }else {
+            layoutMainMenu.setVisibility(View.GONE);
+            layoutCredenciais.setVisibility(View.VISIBLE);
+            sideBarNome.setText("");
+        }
     }
 
     @Override
@@ -620,13 +649,6 @@ public class MainActivity extends AppCompatActivity{
         CardView menuBack = findViewById(R.id.sideMenuBack);
         CardView menuPrincipal = findViewById(R.id.mainMenu);
         CardView menuTop = findViewById(R.id.topMenuLayout);
-        Button deletar = findViewById(R.id.deletarBtn);
-
-        if (usuarioAtual != null){
-                deletar.setVisibility(View.VISIBLE);
-        }else{
-            deletar.setVisibility(View.GONE);
-        }
 
         credencias.setVisibility(View.GONE);
         menuPrincipal.setVisibility(View.GONE);
@@ -676,15 +698,17 @@ public class MainActivity extends AppCompatActivity{
         String senhaText = senha.getText().toString();
         Button cadastroBtn = findViewById(R.id.btnCadastrar2);
 
-        //Criptografa a senha
-        String senhaCriptografada = Criptografia.Criptografar(senhaText, emailText);
-
         CardView cadastroLayout = findViewById(R.id.cadastrarLayout);
         CardView menuPrincipal = findViewById(R.id.mainMenu);
 
         TextView sideBarTesteNome = findViewById(R.id.testeNomeUsuario);
 
-        usuario user = new usuario(nomeText,senhaCriptografada,emailText,telefoneText);
+        String emailCript = Criptografia.Criptografar(emailText, senhaText);
+        String senhaCript = Criptografia.Criptografar(senhaText, emailCript);
+        String nomeCript = Criptografia.Criptografar(nomeText, emailCript);
+        String telefoneCript = Criptografia.Criptografar(telefoneText, emailCript);
+
+        usuario user = new usuario(nomeCript,senhaCript,emailCript,telefoneCript);
 
         Call<Void> call = apiService.addUser(user);
         cadastroBtn.setText(getResources().getString(R.string.carregarBtn));
@@ -694,9 +718,9 @@ public class MainActivity extends AppCompatActivity{
                 if (response.isSuccessful()) {
                     cadastroBtn.setText(getResources().getString(R.string.botao_cadastro));
                     Toast.makeText(MainActivity.this, "Usuario Cadastrado!", Toast.LENGTH_SHORT).show();
-                    usuarioAtual = new usuario(nomeText,"",emailText,telefoneText);
+                    usuarioAtual = new usuario(nomeCript,senhaCript,emailCript,telefoneCript);
 
-                    sideBarTesteNome.setText(usuarioAtual.getNome());
+                    sideBarTesteNome.setText(Criptografia.Descriptografar(usuarioAtual.getNome(), usuarioAtual.getEmail()));
                     cadastroLayout.setVisibility(View.GONE);
                     menuPrincipal.setVisibility(View.VISIBLE);
                 } else {
@@ -721,44 +745,6 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    public void deletarUsuario(View view){
-        TextView sideBarTesteNome = findViewById(R.id.testeNomeUsuario);
-        Button deletarBtn = findViewById(R.id.deletarBtn);
-
-        Call<usuario> call = apiService.deletarUser(usuarioAtual);
-        call.enqueue(new Callback<usuario>() {
-            @Override
-            public void onResponse(Call<usuario> call, Response<usuario> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        usuarioAtual = null;
-                        sideBarTesteNome.setText("");
-                        deletarBtn.setVisibility(View.GONE);
-                        Toast.makeText(MainActivity.this, "Usuario deletado com sucesso!", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Erro ao processar a resposta", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    try {
-                        String errorMessage = response.errorBody() != null ? response.errorBody().string() : "Erro desconhecido";
-                        Log.e("API_ERROR", "Erro ao deletar usuarios " + errorMessage);
-                        Toast.makeText(MainActivity.this, "Erro ao deletar usuarios ", Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Erro ao carregar informações", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<usuario> call, Throwable t) {
-                // Log dos erros
-                t.printStackTrace();
-                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-    });}
-
     public void loginUsuario(View view) {
         EditText email = findViewById(R.id.editEmailLogin);
         EditText senha = findViewById(R.id.editSenhaLogin);
@@ -771,11 +757,11 @@ public class MainActivity extends AppCompatActivity{
         String emailText = email.getText().toString();
         String senhaText = senha.getText().toString();
 
-        //Criptografa a senha
-        String senhaCriptografada = Criptografia.Criptografar(senhaText, emailText);
+        String emailCript = Criptografia.Criptografar(emailText, senhaText);
+        String senhaCript = Criptografia.Criptografar(senhaText, emailCript);
 
         // Cria um objeto usuario
-        usuario user = new usuario(senhaCriptografada, emailText);
+        usuario user = new usuario(senhaCript, emailCript);
 
         // Faz a chamada da API
         Call<usuario> call = apiService.validarUser(user);
@@ -790,14 +776,13 @@ public class MainActivity extends AppCompatActivity{
                     if (loggedInUser != null) {
                         // Extrai as informações e armazena em diferentes variaveis
                         String nome = loggedInUser.getNome();
-                        String email = loggedInUser.getEmail();
                         String telefone = loggedInUser.getCelular();
 
-                        usuarioAtual = new usuario(nome,"",email,telefone);
+                        usuarioAtual = new usuario(nome,senhaCript,emailCript,telefone);
 
                         Toast.makeText(MainActivity.this, "Usuario logado com sucesso!!", Toast.LENGTH_SHORT).show();
                         loginLayout.setVisibility(View.GONE);
-                        sideBarTesteNome.setText(usuarioAtual.getNome());
+                        sideBarTesteNome.setText(Criptografia.Descriptografar(usuarioAtual.getNome(),usuarioAtual.getEmail()));
                         menuPrincipal.setVisibility(View.VISIBLE);
 
                     } else {
@@ -853,8 +838,4 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
-
-
-
 }

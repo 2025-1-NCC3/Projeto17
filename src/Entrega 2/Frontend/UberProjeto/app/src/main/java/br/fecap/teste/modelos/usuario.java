@@ -1,4 +1,7 @@
 package br.fecap.teste.modelos;
+
+import br.fecap.teste.network.Criptografia;
+
 public class usuario {
 
     private String nome;
@@ -7,15 +10,15 @@ public class usuario {
     private String celular;
 
     public usuario(String nome, String senha, String email, String celular) {
+        this.email = email;
         this.nome = nome;
         this.senha = senha;
-        this.email = email;
-        this.celular = celular;
+        this.celular =celular;
     }
 
     public usuario(String senha, String email){
-        this.senha = senha;
         this.email = email;
+        this.senha = senha;
     }
 
 
