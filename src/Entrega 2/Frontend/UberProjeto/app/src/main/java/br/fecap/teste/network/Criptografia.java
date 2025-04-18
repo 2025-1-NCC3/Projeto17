@@ -32,16 +32,16 @@ public class Criptografia {
         return dadoCriptografado;
     }
 
-    public static String Descriptografar(String dado, String email) {
+    public static String Descriptografar(String dado, String chave) {
         char[] dadoCriptoSplit = dado.toCharArray();
-        char[] emailSplit = email.toCharArray();
-        int keyCodes[] = new int[emailSplit.length];
+        char[] chaveSplit = chave.toCharArray();
+        int keyCodes[] = new int[chaveSplit.length];
         int keyCodeDadoCript;
         char dadoDescriptChar;
         String dadoDescriptografado = "";
 
-        for(int i = 0; i<emailSplit.length; i++) {
-            keyCodes[i] = emailSplit[i];
+        for(int i = 0; i<chaveSplit.length; i++) {
+            keyCodes[i] = chaveSplit[i];
         }
 
         for(int i=0,j=0;i<dadoCriptoSplit.length;i++) {
