@@ -1,4 +1,4 @@
-package br.fecap.teste;
+package br.fecap.pi.uberalert;
 
 import android.os.Bundle;
 import android.text.InputType;
@@ -19,10 +19,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 
-import br.fecap.teste.modelos.usuario;
-import br.fecap.teste.network.ApiClient;
-import br.fecap.teste.network.ApiService;
-import br.fecap.teste.network.Criptografia;
+import br.fecap.pi.uberalert.modelos.usuario;
+import br.fecap.pi.uberalert.network.ApiClient;
+import br.fecap.pi.uberalert.network.ApiService;
+import br.fecap.pi.uberalert.network.Criptografia;
+import br.fecap.pi.uberalert.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

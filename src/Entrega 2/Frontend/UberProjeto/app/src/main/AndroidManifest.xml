@@ -20,16 +20,16 @@
         android:theme="@style/Theme.Teste"
         tools:targetApi="31">
         <activity
-            android:name=".Configuracoes"
+            android:name="br.fecap.pi.uberalert.Configuracoes"
             android:exported="false" />
         <activity
-            android:name=".MeuPerfil"
+            android:name="br.fecap.pi.uberalert.MeuPerfil"
             android:exported="false" />
         <activity
-            android:name=".Alertas"
+            android:name="br.fecap.pi.uberalert.Alertas"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="br.fecap.pi.uberalert.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

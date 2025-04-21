@@ -1,6 +1,6 @@
-package br.fecap.teste.modelos;
+package br.fecap.pi.uberalert.modelos;
 
-import br.fecap.teste.network.Criptografia;
+import br.fecap.pi.uberalert.network.Criptografia;
 
 public class Alerta {
     private String nomeUsuario;

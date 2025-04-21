@@ -41,7 +41,7 @@
     <string name="enviarAlertaBtn">Emitir Alerta</string>
 
     <!--Texto TextView - T2-->
-    <string name="tituloT2">Selecione a ocorrência e emita um alerta apartir da sua localização.</string>
+    <string name="tituloT2">Selecione a ocorrência e emita um alerta a partir da sua localização.</string>
 
     <!--Titulo - T3-->
     <string name="tituloT3">Meu Pefil</string>

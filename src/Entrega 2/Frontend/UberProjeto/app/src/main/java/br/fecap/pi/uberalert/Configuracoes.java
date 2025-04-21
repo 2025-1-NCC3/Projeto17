@@ -1,4 +1,4 @@
-package br.fecap.teste;
+package br.fecap.pi.uberalert;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import br.fecap.pi.uberalert.R;
 
 public class Configuracoes extends AppCompatActivity {
 

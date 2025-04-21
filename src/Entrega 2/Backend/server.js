@@ -96,22 +96,29 @@ app.post("/login", function(req, res) {
 app.post("/deletar", function(req, res){
   var email = req.body.email;
   var query1 = 'Select * from usuario where email = ?';
-  var query2 = 'delete from usuario where id = ?'
+  var query2 = 'delete from alerta where idUsuario = ?'
+  var query3 = 'delete from usuario where id = ?'
 
   db.query(query1, [email], (err, rows)=>{
     if (err) {
       console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' });
+      return res.status(500).json({ error: 'Erro buscando usuarios:' + err });
   }
   
   if (rows.length === 0) {
       return res.status(404).json({ error: 'Usuario não encontrado' });
   }
   var id = rows[0].id;
-  db.query(query2, [id], (err, rows) =>{
+  db.query(query2, [id],(err, rows) =>{
     if (err) {
       console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' });
+      return res.status(500).json({ error: 'Erro buscando usuarios' + err });
+  }
+  })
+  db.query(query3, [id], (err, rows) =>{
+    if (err) {
+      console.error('Erro buscando usuarios:', err);
+      return res.status(500).json({ error: 'Erro buscando usuarios' + err });
   }
   return res.status(200).json({ message: "Usuario deletado com sucesso!" });
   })

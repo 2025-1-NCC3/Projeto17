@@ -1,4 +1,4 @@
-package br.fecap.teste.modelos;
+package br.fecap.pi.uberalert.modelos;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 

@@ -330,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="@string/card_cadastro_titulo"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

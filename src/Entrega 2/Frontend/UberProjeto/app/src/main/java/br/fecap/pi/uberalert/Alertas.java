@@ -1,18 +1,13 @@
-package br.fecap.teste;
+package br.fecap.pi.uberalert;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,13 +22,11 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import org.osmdroid.util.GeoPoint;
-
-import br.fecap.teste.modelos.Alerta;
-import br.fecap.teste.modelos.LogErros;
-import br.fecap.teste.network.ApiClient;
-import br.fecap.teste.network.ApiService;
-import br.fecap.teste.network.Criptografia;
+import br.fecap.pi.uberalert.modelos.Alerta;
+import br.fecap.pi.uberalert.network.ApiClient;
+import br.fecap.pi.uberalert.network.ApiService;
+import br.fecap.pi.uberalert.network.Criptografia;
+import br.fecap.pi.uberalert.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

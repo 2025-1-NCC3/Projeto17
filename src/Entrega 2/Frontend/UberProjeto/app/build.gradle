@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'br.fecap.teste'
+    namespace 'br.fecap.pi.uberalert'
     compileSdk 35
 
     defaultConfig {
-        applicationId "br.fecap.teste"
+        applicationId "br.fecap.pi.uberalert"
         minSdk 24
         targetSdk 35
         versionCode 1

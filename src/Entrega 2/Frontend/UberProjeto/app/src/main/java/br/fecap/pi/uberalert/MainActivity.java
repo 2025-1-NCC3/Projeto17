@@ -1,4 +1,4 @@
-package br.fecap.teste;
+package br.fecap.pi.uberalert;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,18 +17,18 @@ import android.view.View;
 import android.animation.ObjectAnimator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.fecap.teste.modelos.Alerta;
-import br.fecap.teste.modelos.GeoJson;
-import br.fecap.teste.modelos.LogErros;
-import br.fecap.teste.modelos.usuario;
-import br.fecap.teste.network.ApiClient;
-import br.fecap.teste.network.ApiService;
-import br.fecap.teste.network.Criptografia;
+import br.fecap.pi.uberalert.modelos.Alerta;
+import br.fecap.pi.uberalert.modelos.GeoJson;
+import br.fecap.pi.uberalert.modelos.LogErros;
+import br.fecap.pi.uberalert.modelos.usuario;
+import br.fecap.pi.uberalert.network.ApiClient;
+import br.fecap.pi.uberalert.network.ApiService;
+import br.fecap.pi.uberalert.network.Criptografia;
+import br.fecap.pi.uberalert.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +43,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +61,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -115,13 +113,12 @@ public class MainActivity extends AppCompatActivity{
 
 
         // Carrega o geoJson
-        String geoJson = loadGeoJsonFromAssets();
-        parseGeoJson(geoJson);
+        //String geoJson = loadGeoJsonFromAssets();
+        //parseGeoJson(geoJson);
 
         // Pede as permições necessarias
         requestPermissionsIfNecessary(new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
-
         });
         //Essa chamada garante que a conexão com o backend esteja funcionando corretamente evitando erros como timeout
         callRootApi();
@@ -509,6 +506,12 @@ public class MainActivity extends AppCompatActivity{
                 overlayItem.setMarker(markerIcon);
             } else if (title.equals("Roubo de carro")) {
                 markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.alertacarro, null);
+                overlayItem.setMarker(markerIcon);
+            }else if(title.equals("Risco de enchente")){
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.enchente, null);
+                overlayItem.setMarker(markerIcon);
+            } else if (title.equals("Trânsito")) {
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.transito, null);
                 overlayItem.setMarker(markerIcon);
             } else if (title.equals("Minha localização")) {
                 markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.localatual, null);

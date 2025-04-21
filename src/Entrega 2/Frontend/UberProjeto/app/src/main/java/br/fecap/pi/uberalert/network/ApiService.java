@@ -1,13 +1,11 @@
-package br.fecap.teste.network;
+package br.fecap.pi.uberalert.network;
 
 import java.util.List;
 
-import br.fecap.teste.Alertas;
-import br.fecap.teste.modelos.Alerta;
-import br.fecap.teste.modelos.LogErros;
-import br.fecap.teste.modelos.usuario;
+import br.fecap.pi.uberalert.modelos.Alerta;
+import br.fecap.pi.uberalert.modelos.LogErros;
+import br.fecap.pi.uberalert.modelos.usuario;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;

@@ -1,11 +1,9 @@
-package br.fecap.teste.modelos;
+package br.fecap.pi.uberalert.modelos;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import br.fecap.teste.Alertas;
-import br.fecap.teste.network.ApiClient;
-import br.fecap.teste.network.ApiService;
+import br.fecap.pi.uberalert.network.ApiClient;
+import br.fecap.pi.uberalert.network.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

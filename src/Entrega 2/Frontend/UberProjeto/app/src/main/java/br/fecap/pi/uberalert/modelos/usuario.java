@@ -1,6 +1,4 @@
-package br.fecap.teste.modelos;
-
-import br.fecap.teste.network.Criptografia;
+package br.fecap.pi.uberalert.modelos;
 
 public class usuario {
 
