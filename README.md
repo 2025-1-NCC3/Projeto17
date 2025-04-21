@@ -5,7 +5,7 @@
 <a href= "https://www.fecap.br/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhZPrRa89Kma0ZZogxm0pi-tCn_TLKeHGVxywp-LXAFGR3B1DPouAJYHgKZGV0XTEf4AE&usqp=CAU" alt="FECAP - Fundação de Comércio Álvares Penteado" border="0"></a>
 </p>
 
-# Nome do Projeto
+# UberAlerta
 
 ## Enrolados
 
@@ -15,11 +15,11 @@
 
 ## Descrição
 
-De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
+O UberAlerta é um aplicativo que busca ajudar passageiros e motoristas a se sentirem mais seguros em suas viagens.
 <br><br>
-Meu projeto ajuda estudantes FECAP a configurarem seus githubs.
+Com base nos dados da Secretaria de Segurança Pública de SP, buscamos mapear áreas de risco em SP, criando um mapa detalhado que ajudara motoristas e passageiros a navegar pela cidade.
 <br><br>
-May the force be with you!
+O nosso aplicativo também inclui um sistema de alertas, onde os usuários são capazes de emitir alertas em casos de roubo, trânsito, acidentes e enchentes.
 <br><br>
 
 ## 🛠 Estrutura de pastas
@@ -57,7 +57,7 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 -<a href="https://developer.android.com/studio?hl=pt-br">Android Studio</a>
 
 ## 📋 Licença/License
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/2025-1-NCC3/Projeto17">UberProject</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/orgs/2025-1-NCC3/teams/grupo17">FECAP, Guilherme Barioni, Iury Xavier, Lilian Conde, Murilo Vieira, Marcus Duque</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p> 
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/2025-1-NCC3/Projeto17">UberAlerta</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/orgs/2025-1-NCC3/teams/grupo17">FECAP, Guilherme Barioni, Iury Xavier, Lilian Conde, Murilo Vieira, Marcus Duque</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p> 
 
 ## 🎓 Referências
 
