@@ -117,9 +117,7 @@ public class MainActivity extends AppCompatActivity{
         //parseGeoJson(geoJson);
 
         // Pede as permições necessarias
-        requestPermissionsIfNecessary(new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        });
+
         //Essa chamada garante que a conexão com o backend esteja funcionando corretamente evitando erros como timeout
         callRootApi();
 
