@@ -64,3 +64,4 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 Aqui estão as referências usadas no projeto.
 
 1. Dados da secretaria de segurança pública de São Paulo: <https://www.ssp.sp.gov.br/assets/estatistica/transparencia/baseDados/veiculosSub/VeiculosSubtraidos_2024.xlsx>
+2. Fonte Uber Move: <https://www.cufonfonts.com/font/uber-move-2>
