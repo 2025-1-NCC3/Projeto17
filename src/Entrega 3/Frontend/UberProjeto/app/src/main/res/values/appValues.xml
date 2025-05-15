@@ -36,6 +36,7 @@
     <string name="rbCarro">Roubo de carro</string>
     <string name="rbEnchente">Enchente</string>
     <string name="rbTransito">Trânsito</string>
+    <string name="rbOutros">Outro</string>
 
     <!--Texto Botões - T2-->
     <string name="enviarAlertaBtn">Emitir Alerta</string>
@@ -64,4 +65,6 @@
 
     <!--Titulo - T4-->
     <string name="tituloT4">Sobre</string>
+    <string name="conteudoT4">O aplicativa UberAlerta foi criado para o projeto interdisciplinar do 3° semestre de ciências da computação na Fecap.\nBuscamos criar um aplicativo que possa ajudar motoristas e passageiros se sentirem mais seguros durante à viagem.\nLink para o Github do projeto:</string>
+    <string name="linkT4">https://github.com/2025-1-NCC3/Projeto17</string>
 </resources>

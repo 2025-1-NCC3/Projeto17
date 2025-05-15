@@ -38,6 +38,7 @@ import retrofit2.Response;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -182,7 +183,6 @@ public class MainActivity extends AppCompatActivity{
                 Intent intent = new Intent(this, Alertas.class);
                 intent.putExtra("usuarioatual", usuarioAtual.getNome());
                 startActivity(intent);
-                sideMenu.setVisibility(View.GONE);
             }else {
                 Toast.makeText(MainActivity.this, "Você não está logado", Toast.LENGTH_SHORT).show();
             }
@@ -530,6 +530,9 @@ public class MainActivity extends AppCompatActivity{
                 }
                 markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.localatual, null);
                 overlayItem.setMarker(markerIcon);
+            } else{
+                markerIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.outroalerta, null);
+                overlayItem.setMarker(markerIcon);
             }
 
             if (markerIcon != null) {
@@ -606,8 +609,8 @@ public class MainActivity extends AppCompatActivity{
     public void onResume() {
         super.onResume();
         //Atualiza o osmdroid onResume
-        map.onResume();
         BuscarAlerta();
+        map.onResume();
         TextView sideBarNome = findViewById(R.id.testeNomeUsuario);
         CardView layoutCredenciais = findViewById(R.id.layoutCredenciais);
         CardView layoutMainMenu = findViewById(R.id.mainMenu);
@@ -641,22 +644,43 @@ public class MainActivity extends AppCompatActivity{
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
-    public void entrarTelaBtn(View view){
+
+    public void disaparecerLayout(){
         CardView credencias = findViewById(R.id.layoutCredenciais);
-        CardView loginLayout = findViewById(R.id.layoutLogin);
         CardView topMenu = findViewById(R.id.topMenuLayout);
         ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-        CardView alertaPopUp = findViewById(R.id.alertaInformacao);
+        CardView alertaPopUpLayout = findViewById(R.id.alertaInformacao);
+        CardView menuPrincipal = findViewById(R.id.mainMenu);
 
-        // Esconde o layout do card
         topMenu.setVisibility(View.GONE);
         btnCentralizar.setVisibility(View.GONE);
         credencias.setVisibility(View.GONE);
-        alertaPopUp.setVisibility(View.GONE);
+        alertaPopUpLayout.setVisibility(View.GONE);
+        menuPrincipal.setVisibility(View.GONE);
+    }
 
+    public void aparecerLayout(){
+        CardView credenciais = findViewById(R.id.layoutCredenciais);
+        CardView menuPrincipal = findViewById(R.id.mainMenu);
+        CardView menuTop = findViewById(R.id.topMenuLayout);
+        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
+        if (usuarioAtual == null){
+            credenciais.setVisibility(View.VISIBLE);
+        }else{
+            menuPrincipal.setVisibility(View.VISIBLE);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) btnCentralizar.getLayoutParams();
+            params.verticalBias = 0.85f;
+            btnCentralizar.setLayoutParams(params);
+        }
+        btnCentralizar.setVisibility(View.VISIBLE);
+        menuTop.setVisibility(View.VISIBLE);
+    }
+    public void entrarTelaBtn(View view){
+        CardView loginLayout = findViewById(R.id.layoutLogin);
+        // Esconde o layout do card
+        disaparecerLayout();
         // Faz o layout do card de login aparecer
         loginLayout.setVisibility(View.VISIBLE);
-
         // Aplica animação ao card
         ObjectAnimator animator = ObjectAnimator.ofFloat(loginLayout, "translationY", 1000f, 0f);
         animator.setDuration(600);
@@ -664,17 +688,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void cadastroTelaBtn(View view){
-        CardView credencias = findViewById(R.id.layoutCredenciais);
         CardView cadastroLayout = findViewById(R.id.cadastrarLayout);
-        CardView topMenu = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-        CardView alertaPopUp = findViewById(R.id.alertaInformacao);
-
-        topMenu.setVisibility(View.GONE);
-        btnCentralizar.setVisibility(View.GONE);
-        alertaPopUp.setVisibility(View.GONE);
-        credencias.setVisibility(View.GONE);
-
+        disaparecerLayout();
         cadastroLayout.setVisibility(View.VISIBLE);
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(cadastroLayout, "translationY", 1000f, 0f);
@@ -683,59 +698,26 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void sideMenuBtn(View view){
-        CardView credencias = findViewById(R.id.layoutCredenciais);
         CardView menuBack = findViewById(R.id.sideMenuBack);
-        CardView menuPrincipal = findViewById(R.id.mainMenu);
-        CardView menuTop = findViewById(R.id.topMenuLayout);
-        CardView alertaPopUp = findViewById(R.id.alertaInformacao);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-
-        btnCentralizar.setVisibility(View.GONE);
-        alertaPopUp.setVisibility(View.GONE);
-        credencias.setVisibility(View.GONE);
-        menuPrincipal.setVisibility(View.GONE);
-        menuTop.setVisibility(View.GONE);
+        disaparecerLayout();
         menuBack.setVisibility(View.VISIBLE);
     }
 
     public void voltarMenuBtn(View view){
-        CardView credenciais = findViewById(R.id.layoutCredenciais);
         CardView menuBack = findViewById(R.id.sideMenuBack);
-        CardView menuPrincipal = findViewById(R.id.mainMenu);
-        CardView menuTop = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-
-        if (usuarioAtual == null){
-            credenciais.setVisibility(View.VISIBLE);
-        }else{
-                menuPrincipal.setVisibility(View.VISIBLE);
-        }
-        btnCentralizar.setVisibility(View.VISIBLE);
-        menuTop.setVisibility(View.VISIBLE);
+        aparecerLayout();
         menuBack.setVisibility(View.GONE);
     }
 
     public void sairCadastroBtn(View view){
-        CardView credencias = findViewById(R.id.layoutCredenciais);
         CardView cadastroLayout = findViewById(R.id.cadastrarLayout);
-        CardView topMenu = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-
-        topMenu.setVisibility(View.VISIBLE);
-        btnCentralizar.setVisibility(View.VISIBLE);
-        credencias.setVisibility(View.VISIBLE);
+        aparecerLayout();
         cadastroLayout.setVisibility(View.GONE);
     }
 
     public void sairLoginBtn(View view){
-        CardView credencias = findViewById(R.id.layoutCredenciais);
         CardView loginLayout = findViewById(R.id.layoutLogin);
-        CardView topMenu = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
-
-        topMenu.setVisibility(View.VISIBLE);
-        btnCentralizar.setVisibility(View.VISIBLE);
-        credencias.setVisibility(View.VISIBLE);
+        aparecerLayout();
         loginLayout.setVisibility(View.GONE);
     }
 
@@ -751,9 +733,6 @@ public class MainActivity extends AppCompatActivity{
         Button cadastroBtn = findViewById(R.id.btnCadastrar2);
 
         CardView cadastroLayout = findViewById(R.id.cadastrarLayout);
-        CardView menuPrincipal = findViewById(R.id.mainMenu);
-        CardView topMenu = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
 
         TextView sideBarTesteNome = findViewById(R.id.testeNomeUsuario);
 
@@ -781,9 +760,7 @@ public class MainActivity extends AppCompatActivity{
 
                     sideBarTesteNome.setText(Criptografia.Descriptografar(usuarioAtual.getNome(), usuarioAtual.getEmail()));
                     cadastroLayout.setVisibility(View.GONE);
-                    menuPrincipal.setVisibility(View.VISIBLE);
-                    topMenu.setVisibility(View.VISIBLE);
-                    btnCentralizar.setVisibility(View.VISIBLE);
+                    aparecerLayout();
                 } else {
                     cadastroBtn.setText(getResources().getString(R.string.botao_cadastro));
                     //Loga o erro para mais detalhes
@@ -813,9 +790,6 @@ public class MainActivity extends AppCompatActivity{
 
         TextView sideBarTesteNome = findViewById(R.id.testeNomeUsuario);
         CardView loginLayout = findViewById(R.id.layoutLogin);
-        CardView menuPrincipal = findViewById(R.id.mainMenu);
-        CardView topMenu = findViewById(R.id.topMenuLayout);
-        ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
 
         String emailText = email.getText().toString();
         String senhaText = senha.getText().toString();
@@ -851,9 +825,7 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(MainActivity.this, "Usuario logado com sucesso!!", Toast.LENGTH_SHORT).show();
                         loginLayout.setVisibility(View.GONE);
                         sideBarTesteNome.setText(Criptografia.Descriptografar(usuarioAtual.getNome(),usuarioAtual.getEmail()));
-                        menuPrincipal.setVisibility(View.VISIBLE);
-                        topMenu.setVisibility(View.VISIBLE);
-                        btnCentralizar.setVisibility(View.VISIBLE);
+                        aparecerLayout();
 
                     } else {
                         Toast.makeText(MainActivity.this, "Nenhum usuario encontrado", Toast.LENGTH_SHORT).show();

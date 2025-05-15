@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -38,7 +39,8 @@ public class Alertas extends AppCompatActivity {
     private String latitude;
     private String longitude;
     private String tipoAlerta;
-    private RadioButton rbCelular, rbCarro, rbEnchente, rbTransito;
+    private RadioButton rbCelular, rbCarro, rbEnchente, rbTransito, rbOutro;
+    private EditText outroText;
     public ApiService apiService;
 
     @Override
@@ -59,6 +61,8 @@ public class Alertas extends AppCompatActivity {
         rbCarro = findViewById(R.id.rbCarro);
         rbTransito = findViewById(R.id.rbTransito);
         rbEnchente = findViewById(R.id.rbEnchente);
+        rbOutro = findViewById(R.id.rbOutro);
+        outroText = findViewById(R.id.editTextAlertaOutro);
 
         Button btnEnviar = findViewById(R.id.emitirAlertaBtn);
         btnEnviar.setOnClickListener(view ->{
@@ -110,6 +114,9 @@ public class Alertas extends AppCompatActivity {
         }
         if (rbTransito.isChecked()){
             tipoAlerta = "Trânsito";
+        }
+        if (rbOutro.isChecked()){
+            tipoAlerta = outroText.getText().toString();
         }
     }
 
