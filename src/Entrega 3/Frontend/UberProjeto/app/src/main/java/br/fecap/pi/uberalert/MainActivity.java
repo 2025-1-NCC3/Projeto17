@@ -281,16 +281,15 @@ public class MainActivity extends AppCompatActivity{
                                     for (int i = 0; i < map.getOverlays().size(); i++) {
                                         Overlay overlay = map.getOverlays().get(i);
 
-                                        // Check if the overlay is an instance of ItemizedOverlayWithFocus
+                                        // Verifica se o overlay é uma instancia do ItemizedOverlayWithFocus
                                         if (overlay instanceof ItemizedOverlayWithFocus) {
                                             ItemizedOverlayWithFocus<OverlayItem> itemizedOverlay = (ItemizedOverlayWithFocus<OverlayItem>) overlay;
 
-                                            // Iterate through the items in the ItemizedOverlayWithFocus
                                             for (int j = 0; j < itemizedOverlay.size(); j++) {
                                                 OverlayItem item = itemizedOverlay.getItem(j);
-                                                GeoPoint point = (GeoPoint) item.getPoint(); // Get the GeoPoint of the overlay item
-                                                double distancia = myLocation.distanceToAsDouble(point); // Calculate the distance
-                                                // Check the distance range and categorize
+                                                GeoPoint point = (GeoPoint) item.getPoint(); // Pega o GeoPoint do overlay
+                                                double distancia = myLocation.distanceToAsDouble(point); //Calcula a distancia
+                                                //Verifica a distancia
                                                 if(item.getTitle() !="Minha localização"){
                                                     if (distancia < 100000 && distancia > 10000) {
                                                         muitoLonge.add(item);
@@ -324,10 +323,10 @@ public class MainActivity extends AppCompatActivity{
         String formattedTime;
         String formattedDate;
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // Input format (2025-04-21T17:29:04.000Z)
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             Date date = inputFormat.parse(data);
 
-            // Format to just time
+            //Formatar para o popup
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             formattedTime = timeFormat.format(date);
@@ -346,13 +345,13 @@ public class MainActivity extends AppCompatActivity{
     private void startTrackingUserLocation() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Create LocationRequest with desired parameters
+        //Cria o location request com certos parametros
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        // Create LocationCallback to handle location updates
+        // Cria o LocationCallback para pedir updates
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -403,11 +402,10 @@ public class MainActivity extends AppCompatActivity{
             }
         };
 
-        // Check if the app has permission to access the location
+        //Verifica se o app tem permissão para pedir a localização
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
         } else {
-            // Request permission if not granted
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
@@ -564,22 +562,19 @@ public class MainActivity extends AppCompatActivity{
                     String clickedTitle = item.getTitle();
                     String clickedData = item.getSnippet();
                     try {
-                        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // Input format (2025-04-21T17:29:04.000Z)
+                        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                         Date date = inputFormat.parse(clickedData);
 
-                        // Format to just time
                         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         String formattedTime = timeFormat.format(date);
                         String formattedDate = dateFormat.format(date);
 
-                        // Combine title with formatted time
                         String popUpText = clickedTitle + "\n" + formattedDate + "\n" + formattedTime;
                         alertaPopUp.setVisibility(View.VISIBLE);
                         alertaPopUpText.setText(popUpText);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        // Handle parsing error, maybe use clickedData as-is
                         String popUpText = clickedTitle + "\n" + clickedData;
                         alertaPopUp.setVisibility(View.VISIBLE);
                         alertaPopUpText.setText(popUpText);
@@ -609,8 +604,8 @@ public class MainActivity extends AppCompatActivity{
     public void onResume() {
         super.onResume();
         //Atualiza o osmdroid onResume
-        BuscarAlerta();
         map.onResume();
+        BuscarAlerta();
         TextView sideBarNome = findViewById(R.id.testeNomeUsuario);
         CardView layoutCredenciais = findViewById(R.id.layoutCredenciais);
         CardView layoutMainMenu = findViewById(R.id.mainMenu);
