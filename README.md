@@ -15,6 +15,10 @@
 
 ## Descrição
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/2025-1-NCC3/Projeto17/refs/heads/main/imagens/Alerta.png" alt="UberAlerta" border="0">
+</p>
+
 O UberAlerta é um aplicativo que busca ajudar passageiros e motoristas a se sentirem mais seguros em suas viagens.
 <br><br>
 Com base nos dados da Secretaria de Segurança Pública de SP, buscamos mapear áreas de risco em SP, criando um mapa detalhado que ajudara motoristas e passageiros a navegar pela cidade.
