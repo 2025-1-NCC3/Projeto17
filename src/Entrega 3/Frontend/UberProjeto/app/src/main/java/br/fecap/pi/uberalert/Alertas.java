@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -40,6 +41,9 @@ public class Alertas extends AppCompatActivity {
     private String longitude;
     private String tipoAlerta;
     private RadioButton rbCelular, rbCarro, rbEnchente, rbTransito, rbOutro;
+    private RadioGroup rgAlertas, rgOutro;
+    private boolean isRbOutroChecked = true;
+    private int contRbOutro = 0;
     private EditText outroText;
     public ApiService apiService;
 
@@ -57,12 +61,37 @@ public class Alertas extends AppCompatActivity {
 
         nomeUsuarioAtual = bundle.getString("usuarioatual");
 
+        rgAlertas = findViewById(R.id.rgAlertas);
         rbCelular = findViewById(R.id.rbCelular);
         rbCarro = findViewById(R.id.rbCarro);
         rbTransito = findViewById(R.id.rbTransito);
         rbEnchente = findViewById(R.id.rbEnchente);
         rbOutro = findViewById(R.id.rbOutro);
         outroText = findViewById(R.id.editTextAlertaOutro);
+
+        rbCelular.setOnClickListener(view->{
+            rbOutro.setChecked(false);
+        });
+
+        rbCarro.setOnClickListener(view->{
+            rbOutro.setChecked(false);
+        });
+
+        rbTransito.setOnClickListener(view->{
+            rbOutro.setChecked(false);
+        });
+
+        rbEnchente.setOnClickListener(view->{
+            rbOutro.setChecked(false);
+        });
+
+        // Listener for the "Outro" RadioButton (rbOutro)
+        rbOutro.setOnClickListener(view->{
+            rbCelular.setChecked(false);
+            rbCarro.setChecked(false);
+            rbEnchente.setChecked(false);
+            rbTransito.setChecked(false);
+        });
 
         Button btnEnviar = findViewById(R.id.emitirAlertaBtn);
         btnEnviar.setOnClickListener(view ->{

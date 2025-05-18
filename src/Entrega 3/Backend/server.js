@@ -111,14 +111,14 @@ app.post("/deletar", function(req, res){
   var id = rows[0].id;
   db.query(query2, [id],(err, rows) =>{
     if (err) {
-      console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' + err });
+      console.error('Erro deletando alertas:', err);
+      return res.status(500).json({ error: 'Erro deletando alertas:' + err });
   }
   })
   db.query(query3, [id], (err, rows) =>{
     if (err) {
-      console.error('Erro buscando usuarios:', err);
-      return res.status(500).json({ error: 'Erro buscando usuarios' + err });
+      console.error('Erro deletando usuarios:', err);
+      return res.status(500).json({ error: 'Erro deletando usuarios' + err });
   }
   return res.status(200).json({ message: "Usuario deletado com sucesso!" });
   })

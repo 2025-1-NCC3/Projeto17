@@ -661,6 +661,9 @@ public class MainActivity extends AppCompatActivity{
         ImageView btnCentralizar = findViewById(R.id.btnCentralizarLocal);
         if (usuarioAtual == null){
             credenciais.setVisibility(View.VISIBLE);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) btnCentralizar.getLayoutParams();
+            params.verticalBias = 0.75f;
+            btnCentralizar.setLayoutParams(params);
         }else{
             menuPrincipal.setVisibility(View.VISIBLE);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) btnCentralizar.getLayoutParams();

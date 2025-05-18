@@ -52,6 +52,7 @@
         app:layout_constraintVertical_bias="0.837" />
 
     <RadioGroup
+        android:id="@+id/rgAlertas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -67,36 +68,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubermovebold"
+            android:text="@string/rbCelular"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/rbCelular" />
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rbCarro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubermovebold"
+            android:text="@string/rbCarro"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/rbCarro" />
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rbEnchente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubermovebold"
+            android:text="@string/rbEnchente"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/rbEnchente" />
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rbTransito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubermovebold"
+            android:text="@string/rbTransito"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/rbTransito" />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,12 +117,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="@font/ubermovebold"
                 android:hint="@string/rbOutros"
                 android:inputType=""
-                android:fontFamily="@font/ubermovebold"
+                android:text=""
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </RadioGroup>
