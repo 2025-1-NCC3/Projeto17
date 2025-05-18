@@ -106,14 +106,14 @@
 
             <RadioButton
                 android:id="@+id/rbOutro"
-                android:layout_width="4dp"
+                android:layout_width="2dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 android:text="" />
 
             <EditText
                 android:id="@+id/editTextAlertaOutro"
-                android:layout_width="wrap_content"
+                android:layout_width="79dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
